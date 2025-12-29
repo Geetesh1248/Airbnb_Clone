@@ -22,23 +22,24 @@ main()
     console.log(err);
   });
 
+//HOME ROUTE
 app.get("/", (req, res) => {
   res.send("Working on it");
 });
 
-// app.get("/testListing", async (req, res) => {
-//   let sampleListing = new Listing({
-//     title: "My New Villa",
-//     description: "By the beach",
-//     price: 1200,
-//     location: "Calangute, Goa",
-//     country: "India",
-//   });
+//INDEX ROUTE
+app.get("/listings", async (req, res) => {
+  const allListing = await Listing.find({});
+  res.render("listings/index.ejs", { allListing });
+});
 
-//   await sampleListing.save();
-//   console.log("sample was saved ");
-//   res.send("successful  testing ");
-// });
+//SHOW ROUTE
+app.get("/listings/:id", async (req, res) => {
+  let {id}=req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/show.ejs", { listing });
+});
+
 
 // Server started
 app.listen(8080, () => {
