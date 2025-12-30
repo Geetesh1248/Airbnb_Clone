@@ -7,13 +7,17 @@
   </head>
   <body>
     <h3>All Listings</h3>
-    <form action="/listings/new/" method="get">
-      <button>Add New</button>
+    
+    <form action="/listing/new" method="get">
+      <button>Create New Listing</button>
     </form>
+
     <ul>
-      <%for(Listing of allListing){%>
-      <li><a href="/listings/<%=Listing._id%>" > <%=Listing.title%> </a></li>
-      <%}%>
+      <% for(let listing of allListing) { %>
+        <li>
+            <a href="/listing/<%= listing._id %>"> <%= listing.title %> </a>
+        </li>
+      <% } %>
     </ul>
   </body>
 </html>
