@@ -42,7 +42,9 @@ app.get("/listing/new", (req, res) => {
 
 // CREATE ROUTE
 app.post("/listing", async (req, res) => {
-  // We expect data like listing[title], listing[price]...
+  // DEBUGGING: Print what the server received
+  console.log(req.body); 
+  
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listing");
@@ -69,6 +71,13 @@ app.put("/listing/:id", async (req, res) => {
   await Listing.findByIdAndUpdate(id, { ...req.body.listing });
   res.redirect(`/listing/`);
 });
+
+//DELETE ROUTE
+app.delete("/listing/:id",async(req,res)=>{
+  let { id } = req.params;
+  await Listing.findByIdAndDelete(id);
+  res.redirect(`/listing/`);
+})
 
 app.listen(8080, () => {
   console.log("server is listening to port : 8080");

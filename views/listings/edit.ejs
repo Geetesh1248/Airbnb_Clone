@@ -9,15 +9,10 @@
     <h3>Edit Listing Details</h3>
 
     <form action="/listing/<%= listing._id %>?_method=PUT" method="POST">
-      <input
-        type="text"
-        name="listing[title]"
-        value="<%= listing.title %>"
-        required
-      />
+      <input type="text" name="listing[title]" value="<%= listing.title %>" />
       <br /><br />
 
-      <textarea name="listing[description]" required>
+      <textarea name="listing[description]">
 <%= listing.description %></textarea
       >
       <br /><br />
@@ -28,21 +23,15 @@
         value="<%= listing.image ? listing.image.url : '' %>"
       />
 
-      <br><br>
+      <br /><br />
 
-      <input
-        type="number"
-        name="listing[price]"
-        value="<%= listing.price %>"
-        required
-      />
+      <input type="number" name="listing[price]" value="<%= listing.price %>" />
       <br /><br />
 
       <input
         type="text"
         name="listing[location]"
         value="<%= listing.location %>"
-        required
       />
       <br /><br />
 
@@ -50,7 +39,6 @@
         type="text"
         name="listing[country]"
         value="<%= listing.country %>"
-        required
       />
       <br /><br />
 
