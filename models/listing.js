@@ -16,7 +16,7 @@ const listingSchema = mongoose.Schema({
         : v;
     },
   },
-  price: String,
+  price: Number,
   location: String,
   country: String,
 });
