@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override"); // FIX 5: Import this
 const Listing = require("./models/listing.js");
+const ejsMate = require("ejs-mate");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method")); // FIX 5: Use this to allow PUT requests
+app.engine("ejs", ejsMate);
 
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/Airbnb");
@@ -43,8 +45,8 @@ app.get("/listing/new", (req, res) => {
 // CREATE ROUTE
 app.post("/listing", async (req, res) => {
   // DEBUGGING: Print what the server received
-  console.log(req.body); 
-  
+  console.log(req.body);
+
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listing");
@@ -73,11 +75,11 @@ app.put("/listing/:id", async (req, res) => {
 });
 
 //DELETE ROUTE
-app.delete("/listing/:id",async(req,res)=>{
+app.delete("/listing/:id", async (req, res) => {
   let { id } = req.params;
   await Listing.findByIdAndDelete(id);
   res.redirect(`/listing/`);
-})
+});
 
 app.listen(8080, () => {
   console.log("server is listening to port : 8080");

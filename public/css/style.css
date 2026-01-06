@@ -1,0 +1,53 @@
+body{
+  /* background-color: pink; */
+}
+
+.navbar {
+  height: 5rem; /* FIXED: No space between 5 and rem */
+  background-color: white;
+}
+
+.fa-compass {
+  /* FIXED: Changed underscore (_) to dash (-) */
+  color: #fe424d;
+  font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+/* Footer */
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info {
+  height: 8rem;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  /* ❌ OLD (Wrong): align-items: space-evenly; */
+  /* ✅ NEW (Correct): align-content controls vertical spacing of rows */
+  align-content: space-evenly; 
+  
+  /* OPTIONAL: Align text inside the full-width containers */
+  text-align: center; 
+}
+.f-info-links {
+  width: 100%;
+}
+
+.f-info-socials {
+  width: 100%;
+  font-size: 1.2rem;
+
+}
+
+
