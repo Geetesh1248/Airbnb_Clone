@@ -1,7 +1,12 @@
-body{
-  /* background-color: pink; */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-
+.container {
+  flex: 1;
+}
 .navbar {
   height: 5rem; /* FIXED: No space between 5 and rem */
   background-color: white;
@@ -14,7 +19,7 @@ body{
 }
 
 .nav-link {
-    color: #222222 !important;
+  color: #222222 !important;
 }
 /* Footer */
 .f-info-links a {
@@ -32,13 +37,13 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
+
   /* ❌ OLD (Wrong): align-items: space-evenly; */
   /* ✅ NEW (Correct): align-content controls vertical spacing of rows */
-  align-content: space-evenly; 
-  
+  align-content: space-evenly;
+
   /* OPTIONAL: Align text inside the full-width containers */
-  text-align: center; 
+  text-align: center;
 }
 .f-info-links {
   width: 100%;
@@ -47,7 +52,51 @@ body{
 .f-info-socials {
   width: 100%;
   font-size: 1.2rem;
-
 }
 
+/* cards */
 
+.card {
+  border: none !important;
+  margin-bottom: 2rem;
+}
+
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.listing-link {
+  text-decoration: none;
+}
+/* Add smooth transition to the image */
+.card-img-top {
+  transition: opacity 0.5s ease;
+}
+
+/* When hovering over the CARD, change the IMAGE opacity */
+.card:hover .card-img-top {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.add-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+
+/* edit page  */
+.edit-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+
+/* Show Page Specific Styling */
+.show-img {
+  height: 30vh;
+}
+
+.btns {
+  display: flex;
+}
