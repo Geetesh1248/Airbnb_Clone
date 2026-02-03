@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { error } = require("console");
+const { listingSchema } = require("./schema.js"); // Import the checklist
 
 const app = express();
 
@@ -29,10 +30,24 @@ main()
     console.log(err);
   });
 
+// The Bouncer Middleware
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(400, errMsg); // Throw bad data to your error page!
+  } else {
+    next(); // Data is good, let them pass!
+  }
+};
+
 // HOME ROUTE
 app.get("/", (req, res) => {
   res.send("Working on it");
 });
+
+
 
 // INDEX ROUTE
 app.get(
@@ -51,6 +66,7 @@ app.get("/listing/new", (req, res) => {
 // CREATE ROUTE
 app.post(
   "/listing",
+  validateListing, // <--- BOUNCER STANDS HERE
   wrapAsync(async (req, res) => {
     // DEBUGGING: Print what the server received
     console.log(req.body);
@@ -100,6 +116,7 @@ app.get(
 // UPDATE ROUTE
 app.put(
   "/listing/:id",
+  validateListing, // <--- AND HERE
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     // This takes the object { title: "...", price: "..." } and updates DB
